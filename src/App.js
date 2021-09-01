@@ -1,9 +1,11 @@
 import "./App.css";
+import { useState } from "react";
 
 const api = {
   key: "7760ff7ca228f062d559622ef8fc9d40",
-  base: "http://api.openweathermap.org/data/2.5/forecast?",
+  base: "http://api.openweathermap.org/data/2.5/weather?",
 };
+
 const dateBuilder = (d) => {
   const months = [
     "January",
@@ -38,25 +40,52 @@ const dateBuilder = (d) => {
 };
 function App() {
   const date = new Date();
-  console.log(date.getMonth());
+  const [location, setLocation] = useState("");
+  const [weather, setWeather] = useState({});
+  const [bg, setBg] = useState("Sunny");
+  const getWeather = (e) => {
+    if (e.key === "Enter") {
+      fetch(`${api.base}q=${location}&units=metric&APPID=${api.key}`)
+        .then((r) => r.json())
+        .then((res) => {
+          setWeather(res);
+          setLocation("");
+        });
+    }
+  };
+
   return (
-    <div className="App sunny">
+    <div className={`App ${weather.weather ? weather.weather[0].main : ""}`}>
       <div className="main">
         <div className="search-box">
-          <input type="text" placeholder="Search" className="search-bar" />
+          <input
+            type="text"
+            placeholder="City name"
+            className="search-bar"
+            onChange={(e) => setLocation(e.target.value)}
+            value={location}
+            onKeyPress={getWeather}
+          />
         </div>
-        <div className="location-box">
-          <h3 className="location">Canada</h3>
-          <p className="date">{dateBuilder(new Date())}</p>
-        </div>
-        <div className="weather-box">
-          <div className="temp">
-            <h1>
-              33<span>&#176;</span>c
-            </h1>
-          </div>
-          <p className="weather">Sunny</p>
-        </div>
+        {weather.weather && (
+          <>
+            <div className="location-box">
+              <h3 className="location">
+                {weather.name}, {weather.sys.country}
+              </h3>
+              <p className="date">{dateBuilder(new Date())}</p>
+            </div>
+            <div className="weather-box">
+              <div className="temp">
+                <h1>
+                  {Math.round(weather.main.temp)}
+                  <span>&#176;</span>c
+                </h1>
+              </div>
+              <p className="weather">{weather.weather[0].main}</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

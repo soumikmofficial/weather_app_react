@@ -7,16 +7,28 @@ body {
 .App {
   height: 100vh;
   width: 100vw;
-  background-image: linear-gradient(
-    to bottom,
-    rgb(0, 0, 0, 0.2),
-    rgb(0, 0, 0, 0.75)
-  );
+  background-image: url("assets/clear.jpg");
+  background-size: cover;
 }
 
-.App.sunny {
-  background-image: url("assets/sunny.jpg");
-  background-size: cover;
+.App.Mist {
+  background-image: url("assets/mist.jpg");
+}
+
+.App.Rain {
+  background-image: url("assets/umbrella4.jpg");
+}
+
+.App.Clear {
+  background-image: url("assets/clear.jpg");
+}
+
+.App.Haze {
+  background-image: url("assets/haze.jpeg");
+}
+
+.App.Clouds {
+  background-image: url("assets/clouds2.jpg");
 }
 
 .main {
@@ -40,7 +52,7 @@ body {
 .main .search-box {
   width: 70%;
   /* margin: 0 auto; */
-  height: 6rem;
+  height: 8rem;
   margin-top: -2rem;
   position: absolute;
   top: 0;
@@ -52,12 +64,16 @@ body {
   border: none;
   appearance: none;
   outline: none;
-  padding: 1rem;
+  padding: 0 2rem;
+  padding-top: 2rem;
   border-radius: 0 0 2rem 2rem;
   background-color: rgba(255, 255, 255, 0.5);
   color: rgb(36, 34, 34);
   transition: all 0.3s ease;
   box-shadow: 0 0.5rem rgb(red, green, blue, 0.2);
+  display: flex;
+  font-size: 2rem;
+  text-align: center;
 }
 
 .search-bar:focus {
@@ -95,7 +111,7 @@ body {
 
 .weather-box .weather {
   color: var(--main-color);
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: bold;
   text-align: center;
   margin-top: 3rem;
