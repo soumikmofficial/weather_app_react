@@ -7,7 +7,7 @@ body {
 .App {
   height: 100vh;
   width: 100vw;
-  background-image: url("assets/clear.jpg");
+  background-image: url("assets/warm.jpg");
   background-size: cover;
 }
 
