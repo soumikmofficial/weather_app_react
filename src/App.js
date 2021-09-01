@@ -42,7 +42,7 @@ function App() {
   const date = new Date();
   const [location, setLocation] = useState("");
   const [weather, setWeather] = useState({});
-  const [bg, setBg] = useState("Sunny");
+
   const getWeather = (e) => {
     if (e.key === "Enter") {
       fetch(`${api.base}q=${location}&units=metric&APPID=${api.key}`)
