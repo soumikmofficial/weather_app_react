@@ -42,16 +42,18 @@ function App() {
   const date = new Date();
   const [location, setLocation] = useState("");
   const [weather, setWeather] = useState({});
-  const [bg, setBg] = useState("Sunny");
+  const [test, setTest] = useState("");
+
   const getWeather = (e) => {
-    if (e.key === "Enter") {
-      fetch(`${api.base}q=${location}&units=metric&APPID=${api.key}`)
-        .then((r) => r.json())
-        .then((res) => {
-          setWeather(res);
-          setLocation("");
-        });
-    }
+    // if (e.key === "Enter") {
+    //   fetch(`${api.base}q=${location}&units=metric&APPID=${api.key}`)
+    //     .then((r) => r.json())
+    //     .then((res) => {
+    //       setWeather(res);
+    //       setLocation("");
+    //     });
+    // }
+    setTest(e.key);
   };
 
   return (
@@ -67,6 +69,8 @@ function App() {
             onKeyPress={getWeather}
           />
         </div>
+        <h2>{test}</h2>
+
         {weather.weather && (
           <>
             <div className="location-box">
