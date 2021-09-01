@@ -4,6 +4,8 @@
 
 <!-- todo: collect the assets in the assets folder -->
 
-<!-- todo: the markup: input -->
+<!-- todo: the markup: search box, location box, weather box -->
 
 <!-- todo: css: change app background depending on class -->
+
+<!-- todo: datebuilder -->
