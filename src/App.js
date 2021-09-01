@@ -43,29 +43,41 @@ function App() {
   const [location, setLocation] = useState("");
   const [weather, setWeather] = useState({});
 
+  // const getWeather = (e) => {
+  //   if (e.key === "Enter") {
+  //     fetch(`${api.base}q=${location}&units=metric&APPID=${api.key}`)
+  //       .then((r) => r.json())
+  //       .then((res) => {
+  //         setWeather(res);
+  //         setLocation("");
+  //       });
+  //   }
+  // };
+
   const getWeather = (e) => {
-    if (e.key === "Enter") {
-      fetch(`${api.base}q=${location}&units=metric&APPID=${api.key}`)
-        .then((r) => r.json())
-        .then((res) => {
-          setWeather(res);
-          setLocation("");
-        });
-    }
+    e.preventDefault();
+    fetch(`${api.base}q=${location}&units=metric&APPID=${api.key}`)
+      .then((r) => r.json())
+      .then((res) => {
+        setWeather(res);
+        setLocation("");
+      });
   };
 
   return (
     <div className={`App ${weather.weather ? weather.weather[0].main : ""}`}>
       <div className="main">
         <div className="search-box">
-          <input
-            type="text"
-            placeholder="City name"
-            className="search-bar"
-            onChange={(e) => setLocation(e.target.value)}
-            value={location}
-            onKeyPress={getWeather}
-          />
+          <form action="" onSubmit={getWeather}>
+            <input
+              type="text"
+              placeholder="City name"
+              className="search-bar"
+              onChange={(e) => setLocation(e.target.value)}
+              value={location}
+              // onKeyPress={getWeather}
+            />
+          </form>
         </div>
         {weather.weather && (
           <>
