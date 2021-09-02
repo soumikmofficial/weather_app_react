@@ -46,7 +46,6 @@ function App() {
 
   const getWeather = (e) => {
     e.preventDefault();
-    setLocation(locationRef.current.value);
     fetch(
       `${api.base}q=${locationRef.current.value}&units=metric&APPID=${api.key}`
     )
@@ -66,10 +65,9 @@ function App() {
               type="text"
               placeholder="City name"
               className="search-bar"
-              // onChange={(e) => setLocation(e.target.value)}
+              onChange={(e) => setLocation(e.target.value)}
               ref={locationRef}
-              // value={location}
-              // onKeyPress={getWeather}
+              value={location}
             />
           </form>
         </div>
