@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const api = {
   key: "7760ff7ca228f062d559622ef8fc9d40",
@@ -42,25 +42,18 @@ function App() {
   const date = new Date();
   const [location, setLocation] = useState("");
   const [weather, setWeather] = useState({});
-
-  // const getWeather = (e) => {
-  //   if (e.key === "Enter") {
-  //     fetch(`${api.base}q=${location}&units=metric&APPID=${api.key}`)
-  //       .then((r) => r.json())
-  //       .then((res) => {
-  //         setWeather(res);
-  //         setLocation("");
-  //       });
-  //   }
-  // };
+  const locationRef = useRef();
 
   const getWeather = (e) => {
     e.preventDefault();
-    fetch(`${api.base}q=${location}&units=metric&APPID=${api.key}`)
+    setLocation(locationRef.current.value);
+    fetch(
+      `${api.base}q=${locationRef.current.value}&units=metric&APPID=${api.key}`
+    )
       .then((r) => r.json())
       .then((res) => {
         setWeather(res);
-        setLocation("");
+        locationRef.current.value = "";
       });
   };
 
@@ -73,8 +66,9 @@ function App() {
               type="text"
               placeholder="City name"
               className="search-bar"
-              onChange={(e) => setLocation(e.target.value)}
-              value={location}
+              // onChange={(e) => setLocation(e.target.value)}
+              ref={locationRef}
+              // value={location}
               // onKeyPress={getWeather}
             />
           </form>
